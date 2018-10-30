@@ -10,14 +10,15 @@ namespace day1
 {
     class ReadBlockDate
     {
-        private Dictionary<Vector3,int> blockList = new Dictionary<Vector3, int>();
-        private List<Vector2> ChankList = new List<Vector2>();
+        public Dictionary<Vector3, int> GetBlockDate { get; } = new Dictionary<Vector3, int>();
+        public List<Vector2> GetChankDate { get; } = new List<Vector2>();
+
         public ReadBlockDate()                  //バイナリファイル
         {                                       //ここをテキストファイルの絶対パスにしてね
             FileStream datafs = new FileStream(@"F:\ProjectITSUKI\3D\ITSUKI\day1\TextFile3.txt", FileMode.Open);
             StreamReader dataSr = new StreamReader(datafs);
             int X = 0, Z = 0;
-            int x=0,y=0, z=0;
+            int x=0,y=0, z=0, w=0;
             while (!dataSr.EndOfStream)
             {
                 ///一番最初の数値で座標を手に入れる
@@ -29,7 +30,7 @@ namespace day1
                 {
                     X = (int.Parse(items[0])) * 16;
                     Z = (int.Parse(items[1])) * 16;
-                    ChankList.Add(new Vector2(X, Z));
+                    GetChankDate.Add(new Vector2(X, Z));
                     x = 0;y = 0;z = 0;
                     continue;
                 }
@@ -38,20 +39,12 @@ namespace day1
                 z = 0;
                 foreach (var item in items)
                 {
-                    blockList.Add(new Vector3(X + x, y, Z + z), int.Parse(item));
+                    GetBlockDate.Add(new Vector3(X + x, y, Z + z), int.Parse(item));
                     z++;
                 }
                 if (x < 15) x++; else { x = 0; y++; }//15 = 0から数えた16
             }
             dataSr.Close();
-        }
-        public Dictionary<Vector3, int> GetBlockDate()
-        {
-            return blockList;
-        }
-        public List<Vector2> GetChankDate()
-        {
-            return ChankList;
         }
     }
 }

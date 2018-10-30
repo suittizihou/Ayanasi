@@ -42,6 +42,7 @@ namespace day1
             _h5 = _h4 + 1;
             _h6 = _h4 + ChunkSize;
             _h7 = _h6 + 1;
+            graphics.IsFullScreen = true;
         }
 
         protected override void Initialize()
@@ -359,6 +360,7 @@ namespace day1
             if (keyboardState.IsKeyDown(Keys.W)) Pz -= 0.1f;
             if (keyboardState.IsKeyDown(Keys.S)) Pz += 0.1f;
             if (keyboardState.IsKeyDown(Keys.LeftShift)) Py -= 0.5f;
+            if (keyboardState.IsKeyDown(Keys.Space)) Py += 0.5f;
             if (keyboardState.IsKeyDown(Keys.Space)) Py += 0.5f;
 
 
